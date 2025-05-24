@@ -24,20 +24,6 @@ Containerization using Docker
 
 Using relational databases with web apps
 
-🧪 The course also teaches important development practices such as:
 
-Environment and configuration management
-
-Writing unit and integration tests
-
-Version control with Git
-
-🎓 The course is completely free. Participants can earn:
-
-A certificate of completion
-
-University of Helsinki ECTS credits (5–14 credits)
-
-Additional credits (1–10) for completing an associated project
 
 
