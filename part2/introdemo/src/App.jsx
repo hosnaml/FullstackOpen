@@ -45,7 +45,7 @@ const App = () => {
   return (
     <>
       <Course course={course} />
-      <p>Number of exercises {total}</p>
+      <p>Total of {total} exercises</p>
     </>
   );
 };
