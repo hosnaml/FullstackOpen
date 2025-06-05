@@ -1,4 +1,6 @@
 import { useState } from "react";
+import axios from "axios";
+import { useEffect } from "react";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
@@ -33,6 +35,12 @@ const App = () => {
     setNewName("");
     setNewNumber("");
   };
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/persons").then((response) => {
+      setPersons(response.data);
+    });
+  }, []);
 
   return (
     <div>
