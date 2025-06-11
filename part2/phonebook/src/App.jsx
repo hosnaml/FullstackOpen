@@ -4,9 +4,10 @@ import { useEffect } from "react";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
+import personsService from "./services/persons";
 
 const App = () => {
-  const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
+  const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [filter, setfilter] = useState("");
@@ -31,14 +32,27 @@ const App = () => {
       return;
     }
 
-    setPersons(persons.concat({ name: newName, number: newNumber }));
-    setNewName("");
-    setNewNumber("");
+    const newPerson = { name: newName, number: newNumber };
+
+    personsService.create(newPerson).then((response) => {
+      setPersons(persons.concat(response.data));
+      setNewName("");
+      setNewNumber("");
+    });
+  };
+
+  const deletePerson = (id) => {
+    if (window.confirm("Are you sure you want to delete this person?")) {
+      personsService.deletePerson(id).then((response) => {
+        setPersons(persons.filter((person) => person.id !== id));
+      });
+      //setPersons(persons.filter((person) => person.id !== id));
+    }
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3001/persons").then((response) => {
-      setPersons(response.data);
+    personsService.getAll().then((persons) => {
+      setPersons(persons);
     });
   }, []);
 
@@ -57,7 +71,7 @@ const App = () => {
         addPerson={addPerson}
       />
       <h3>Numbers</h3>
-      <Persons persons={persons} filter={filter} />
+      <Persons persons={persons} filter={filter} onDelete={deletePerson} />
     </div>
   );
 };

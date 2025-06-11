@@ -1,11 +1,16 @@
-const Persons = (props) => {
+const Persons = ({ persons, filter, onDelete }) => {
   return (
     <div>
-      {props.persons
-        .filter((person) => person.name.includes(props.filter))
+      {persons
+        .filter((person) => {
+          return person.name.includes(filter);
+        })
         .map((person) => (
-          <div key={person.name}>
-            {person.name} {person.number}
+          <div key={person.id}>
+            <div>
+              {person.name} {person.number}
+            </div>
+            <button onClick={() => onDelete(person.id)}>delete</button>
           </div>
         ))}
     </div>
