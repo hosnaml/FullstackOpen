@@ -1,16 +1,17 @@
 import { useState } from "react";
-import axios from "axios";
 import { useEffect } from "react";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
 import personsService from "./services/persons";
+import Notification from "./components/Notification";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [filter, setfilter] = useState("");
+  const [message, setMessage] = useState(null);
 
   const handleNumberChange = (event) => {
     setNewNumber(event.target.value);
@@ -28,7 +29,7 @@ const App = () => {
     event.preventDefault();
 
     if (persons.some((person) => person.name === newName)) {
-      alert(
+      setMessage(
         `${newName} is already added to phonebook, replace the old number with the new one?`
       );
       personsService
@@ -46,6 +47,7 @@ const App = () => {
           );
           setNewName("");
           setNewNumber("");
+          setMessage(`Updated ${newName}`);
         });
       return;
     }
@@ -56,14 +58,26 @@ const App = () => {
       setPersons(persons.concat(response.data));
       setNewName("");
       setNewNumber("");
+      setMessage(`Added ${newName}`);
     });
   };
 
   const deletePerson = (id) => {
-    if (window.confirm("Are you sure you want to delete this person?")) {
-      personsService.remove(id).then(() => {
-        setPersons(persons.filter((person) => person.id !== id));
-      });
+    const personToDelete = persons.find((p) => p.id === id);
+
+    if (window.confirm(`Delete ${personToDelete.name}?`)) {
+      personsService
+        .remove(id)
+        .then(() => {
+          setPersons(persons.filter((person) => person.id !== id));
+          setMessage(`Deleted ${personToDelete.name}`);
+        })
+        .catch((error) => {
+          setMessage(
+            `Information of ${personToDelete.name} has already been removed from server`
+          );
+          setPersons(persons.filter((person) => person.id !== id));
+        });
     }
   };
 
@@ -76,6 +90,7 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
+      <Notification message={message} setMessage={setMessage} />
       <div>
         <Filter filter={filter} handleNameFilter={handleNameFilter} />
       </div>

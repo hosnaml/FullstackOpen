@@ -1,55 +1,68 @@
-import Course from "./Course";
+import { useState, useEffect } from "react";
+import countriesService from "./services/countries";
 
 const App = () => {
-  const courses = [
-    {
-      name: "Half Stack application development",
-      id: 1,
-      parts: [
-        {
-          name: "Fundamentals of React",
-          exercises: 10,
-          id: 1,
-        },
-        {
-          name: "Using props to pass data",
-          exercises: 7,
-          id: 2,
-        },
-        {
-          name: "State of a component",
-          exercises: 14,
-          id: 3,
-        },
-        {
-          name: "Redux",
-          exercises: 11,
-          id: 4,
-        },
-      ],
-    },
-    {
-      name: "Node.js",
-      id: 2,
-      parts: [
-        {
-          name: "Routing",
-          exercises: 3,
-          id: 1,
-        },
-        {
-          name: "Middlewares",
-          exercises: 7,
-          id: 2,
-        },
-      ],
-    },
-  ];
+  const [filter, setfilter] = useState("");
+  const [countries, setCountries] = useState([]);
+  const [error, setError] = useState(null);
+
+  const handleNameFilter = (event) => {
+    setfilter(event.target.value);
+  };
+
+  useEffect(() => {
+    countriesService
+      .getAll()
+      .then((response) => {
+        setCountries(response);
+      })
+      .catch((error) => {
+        setError("Error fetching countries data");
+        console.error("Error:", error);
+      });
+  }, []);
+
+  const filteredCountries = countries.filter((country) =>
+    country.name.common.toLowerCase().includes(filter.toLowerCase())
+  );
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div>
-      <h1>Web development curriculum</h1>
-      <Course courses={courses} />
+      <div>
+        Find countries <input value={filter} onChange={handleNameFilter} />
+      </div>
+      <div>
+        {filteredCountries.length > 10 ? (
+          <p>Too many matches, specify another filter</p>
+        ) : filteredCountries.length === 1 ? (
+          <div>
+            <h2>{filteredCountries[0].name.common}</h2>
+            <p>Capital: {filteredCountries[0].capital}</p>
+            <p>Area: {filteredCountries[0].area} km²</p>
+            <h3>Languages:</h3>
+            <ul>
+              {Object.values(filteredCountries[0].languages).map((language) => (
+                <li key={language}>{language}</li>
+              ))}
+            </ul>
+            <img
+              src={filteredCountries[0].flags.png}
+              alt={`Flag of ${filteredCountries[0].name.common}`}
+              style={{ width: "200px" }}
+            />
+          </div>
+        ) : (
+          filteredCountries.map((country) => (
+            <div key={country.name.common}>
+              <p>{country.name.common}</p>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 };
