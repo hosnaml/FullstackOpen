@@ -15,6 +15,10 @@ const App = () => {
     setfilter(event.target.value);
   };
 
+  const handleShowButton = (country) => {
+    setfilter(country.name.common.toLowerCase());
+  };
+
   const filteredCountries = countries.filter((country) =>
     country.name.common.toLowerCase().includes(filter.toLowerCase())
   );
@@ -62,15 +66,15 @@ const App = () => {
         {filteredCountries.length > 10 && (
           <p>Too many matches, specify another filter</p>
         )}
-
         {selectedCountry && <Countries selectedCountry={selectedCountry} />}
-        {weather && <Weather weather={weather} />}
+        {weather && selectedCountry && <Weather weather={weather} />}
 
         {filteredCountries.length <= 10 &&
           !selectedCountry &&
           filteredCountries.map((country) => (
             <div key={country.name.common}>
               <p>{country.name.common}</p>
+              <button onClick={() => handleShowButton(country)}>show</button>
             </div>
           ))}
       </div>
