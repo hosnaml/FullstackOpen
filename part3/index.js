@@ -29,6 +29,13 @@ var persons = [
     }
 ]
 
+morgan.token('body', (req) => JSON.stringify(req.body));
+app.use(
+  morgan(':method :url :status :res[content-length] - :response-time ms :body', {
+    skip: (req) => req.method !== 'POST'
+  })
+); 
+
 app.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>')
 })
