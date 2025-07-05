@@ -10,8 +10,8 @@ app.use(morgan('tiny'));
 const cors = require('cors')
 app.use(cors())
 
-// Serve static files from the 'dist' directory
 app.use(express.static(path.join(__dirname, 'dist')));
+
 
 var persons = [
     { 
