@@ -54,12 +54,18 @@ const App = () => {
 
     const newPerson = { name: newName, number: newNumber };
 
-    personsService.create(newPerson).then((response) => {
-      setPersons(persons.concat(response.data));
-      setNewName("");
-      setNewNumber("");
-      setMessage(`Added ${newName}`);
-    });
+    personsService
+      .create(newPerson)
+      .then((response) => {
+        setPersons(persons.concat(response.data));
+        setNewName("");
+        setNewNumber("");
+        setMessage(`Added ${newName}`);
+      })
+      .catch((error) => {
+        console.log(error.response.data.error);
+        setMessage(error.response.data.error);
+      });
   };
 
   const deletePerson = (id) => {
