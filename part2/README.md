@@ -1,9 +1,11 @@
 📚 **Part 2: Deepening Your React Skills**
+
 In this part, we will continue exploring the fundamentals of React.
 
 We’ll cover how to render collections of data, handle user input with forms, and communicate with a backend server. Finally, we’ll see how to add styling to make our applications look better.
 
-✨ Topics Covered
+✨ Topics Covered:
+
 ✅ **Rendering a Collection and Using Modules**
 
 Learn how to display lists of items (e.g., a list of names) dynamically in React, and organize your code into reusable modules.
