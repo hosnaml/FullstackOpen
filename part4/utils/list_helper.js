@@ -17,11 +17,36 @@ const mostLikes = (blogs) => {
     }
 
     if (blogs.length === 1) {
-        return (blogs[0].likes)
+        return blogs[0]
     }
     
     return blogs.reduce((mostLiked, current) => {
         return current.likes > mostLiked.likes ? current : mostLiked
     })
 }
-module.exports = {dummy, totalLikes, mostLikes}
+
+const mostBlogs = (blogs) => {
+    if (blogs.length === 0) {
+        return null
+    }
+
+    // Count blogs per author
+    const authorCounts = blogs.reduce((counts, blog) => {
+        counts[blog.author] = (counts[blog.author] || 0) + 1
+        return counts
+    }, {})
+
+    // Find the author with the most blogs
+    const topAuthor = Object.keys(authorCounts).reduce((mostProductive, author) => {
+        return authorCounts[author] > authorCounts[mostProductive] 
+            ? author 
+            : mostProductive
+    })
+
+    return {
+        author: topAuthor,
+        blogs: authorCounts[topAuthor]
+    }
+}
+
+module.exports = {dummy, totalLikes, mostLikes, mostBlogs}

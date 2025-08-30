@@ -84,13 +84,38 @@ describe('favorite blog', () => {
 
   test('when list has only one blog, equals that blog', () => {
     const result = listHelper.mostLikes([blogs[0]])
-    assert.deepStrictEqual(result, 7)
+    assert.deepStrictEqual(result, blogs[0])
   })
 
   test('when list has multiple blogs, returns the one with most likes', () => {
     const result = listHelper.mostLikes(blogs)
     // Should return the blog object with 12 likes (either "Canonical string reduction" or "First class tests")
     assert.strictEqual(result.likes, 12)
+  })
+
+})
+
+describe('most blogs', () => {
+
+  test('when list is empty, returns null', () => {
+    const result = listHelper.mostBlogs([])
+    assert.strictEqual(result, null)
+  })
+
+  test('when list has only one blog, returns that author', () => {
+    const result = listHelper.mostBlogs([blogs[0]])
+    assert.deepStrictEqual(result, {
+      author: 'Michael Chan',
+      blogs: 1
+    })
+  })
+
+  test('when list has multiple blogs, returns author with most blogs', () => {
+    const result = listHelper.mostBlogs(blogs)
+    assert.deepStrictEqual(result, {
+      author: 'Robert C. Martin',
+      blogs: 3
+    })
   })
 
 })
