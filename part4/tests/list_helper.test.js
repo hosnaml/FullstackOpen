@@ -31,7 +31,7 @@ const blogs = [
     title: "First class tests",
     author: "Robert C. Martin",
     url: "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll",
-    likes: 10,
+    likes: 12,
     __v: 0
   },
   {
@@ -60,7 +60,7 @@ test('dummy returns one', () => {
 describe('total likes', () => {
     
     test('when list has only one blog, equals the likes of that', () => {
-      const result = listHelper.totalLikes(blogs[0])
+      const result = listHelper.totalLikes([blogs[0]])
       assert.strictEqual(result, 7)
     })
 
@@ -71,6 +71,26 @@ describe('total likes', () => {
 
     test('when list has multiple blogs, returns sum of all likes', () => {
       const result = listHelper.totalLikes(blogs)
-      assert.strictEqual(result, 36) // 7 + 5 + 12 + 10 + 0 + 2 = 36
+      assert.strictEqual(result, 38) // 7 + 5 + 12 + 12 + 0 + 2 = 38
     })
   })
+
+describe('favorite blog', () => {
+
+  test('when list has no blogs', () => {
+    const result = listHelper.mostLikes([])
+    assert.strictEqual(result, null)
+  })
+
+  test('when list has only one blog, equals that blog', () => {
+    const result = listHelper.mostLikes([blogs[0]])
+    assert.deepStrictEqual(result, 7)
+  })
+
+  test('when list has multiple blogs, returns the one with most likes', () => {
+    const result = listHelper.mostLikes(blogs)
+    // Should return the blog object with 12 likes (either "Canonical string reduction" or "First class tests")
+    assert.strictEqual(result.likes, 12)
+  })
+
+})
