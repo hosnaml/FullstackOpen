@@ -6,19 +6,27 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "node --test"
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development node --watch index.js",
+    "test": "NODE_ENV=test node --test",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.21.2",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
     "mongoose": "^8.10.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "eslint": "^9.34.0",
+    "eslint-plugin-jest": "^29.0.1",
+    "globals": "^16.3.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.5",
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.4"
   }
 }
