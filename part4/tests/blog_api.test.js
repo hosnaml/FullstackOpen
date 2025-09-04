@@ -2,15 +2,35 @@ const { test, after, beforeEach, describe } = require('node:test')
 const assert = require('node:assert')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
+const bcrypt = require('bcrypt')
 const app = require('../app')
 const Blog = require('../models/blog')
+const User = require('../models/user')
 const helper = require('./test_helper')
 
 const api = supertest(app)
 
 beforeEach(async () => {
   await Blog.deleteMany({})
-  await Blog.insertMany(helper.initialBlogs)
+  await User.deleteMany({})
+
+  // Create a test user that will be used as the creator for blogs
+  const passwordHash = await bcrypt.hash('sekret', 10)
+  const user = new User({ username: 'testuser', passwordHash })
+  await user.save()
+
+  // Create initial blogs with the test user as creator
+  const blogsWithUser = helper.initialBlogs.map(blog => ({
+    ...blog,
+    user: user._id
+  }))
+  await Blog.insertMany(blogsWithUser)
+
+  // Update user's blogs array
+  const savedBlogs = await Blog.find({})
+  await User.findByIdAndUpdate(user._id, { 
+    blogs: savedBlogs.map(blog => blog._id) 
+  })
 })
 
 
@@ -35,6 +55,15 @@ describe('when there are initially some blogs saved', () => {
     const titles = response.body.map(e => e.title)
     assert.strictEqual(titles.includes('React patterns'), true)
   })
+
+  test('blogs contain user information', async () => {
+    const response = await api.get('/api/blogs')
+
+    const blog = response.body[0]
+    assert(blog.user)
+    assert(blog.user.username)
+    assert(typeof blog.user.username === 'string')
+  })
 })
 
 describe('addition of a new blog', () => {
@@ -46,7 +75,7 @@ describe('addition of a new blog', () => {
       likes: 5
     }
 
-    await api
+    const response = await api
       .post('/api/blogs')
       .send(newBlog)
       .expect(201)
@@ -57,6 +86,31 @@ describe('addition of a new blog', () => {
 
     const titles = blogsAtEnd.map(b => b.title)
     assert(titles.includes('Async/Await Guide'))
+
+    // Verify that the blog was assigned to a user
+    assert(response.body.user)
+  })
+
+  test('a new blog gets assigned to the first user found', async () => {
+    const newBlog = {
+      title: 'Test Blog for User Assignment',
+      author: 'Test Author',
+      url: 'https://example.com/user-assignment',
+      likes: 3
+    }
+
+    const response = await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+
+    // Get the user to verify the blog was assigned correctly
+    const users = await helper.usersInDb()
+    const user = users[0] // Should be our test user
+    
+    assert(response.body.user)
+    assert.strictEqual(response.body.user.toString(), user.id)
   })
 
   test('blog without title is not added', async () => {
@@ -112,7 +166,9 @@ describe('updating a blog', () => {
     const blogToUpdate = blogsAtStart[0]
     
     const updatedData = {
-      ...blogToUpdate,
+      title: blogToUpdate.title,
+      author: blogToUpdate.author,
+      url: blogToUpdate.url,
       likes: blogToUpdate.likes + 10
     }
 

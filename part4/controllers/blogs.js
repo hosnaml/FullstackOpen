@@ -1,15 +1,16 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
+const User = require('../models/user')
 
-blogsRouter.get('/', (request, response) => {
-    Blog.find({}).then((blogs) => {
-      response.json(blogs)
-    })
-  })
+blogsRouter.get('/', async (request, response) => {
+  const blogs = await Blog
+    .find({}).populate('user', { username: 1, name: 1 })
+  response.json(blogs)
+})
   
 blogsRouter.get('/:id', async (request, response) => {
   try {
-    const blog = await Blog.findById(request.params.id)
+    const blog = await Blog.findById(request.params.id).populate('user', { username: 1, name: 1 })
     if (blog) {
       response.json(blog)
     } else {
@@ -21,10 +22,33 @@ blogsRouter.get('/:id', async (request, response) => {
 })
 
 blogsRouter.post('/', async (request, response) => {
-  const blog = new Blog(request.body)
+  try {
+    const body = request.body
 
-  const savedBlog = await blog.save()
-  response.status(201).json(savedBlog)
+    // Get the first user from the database as the creator
+    const user = await User.findOne({})
+
+    if (!user) {
+      return response.status(400).json({ error: 'no users found in database' })
+    }
+
+    const blog = new Blog({
+      title: body.title,
+      author: body.author,
+      url: body.url,
+      likes: body.likes || 0,
+      user: user._id
+    })
+
+    const savedBlog = await blog.save()
+    await User.findByIdAndUpdate(user._id, { 
+      $push: { blogs: savedBlog._id } 
+    })
+
+    response.status(201).json(savedBlog)
+  } catch(exception) {
+    response.status(400).json({ error: exception.message })
+  }
 })
 
 blogsRouter.put('/:id', async (request, response) => {
