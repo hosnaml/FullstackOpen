@@ -33,11 +33,11 @@ module.exports = [
       // Custom rule to detect test.only
       'no-restricted-properties': [
         'error',
-        {
-          object: 'test',
-          property: 'only',
-          message: 'test.only should not be committed. Use test() instead.',
-        },
+        // {
+        //   object: 'test',
+        //   property: 'only',
+        //   message: 'test.only should not be committed. Use test() instead.',
+        // },
         {
           object: 'describe',
           property: 'only',

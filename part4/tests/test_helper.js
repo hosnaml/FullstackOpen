@@ -1,6 +1,7 @@
 const Blog = require('../models/blog')
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const initialBlogs = [
   {
@@ -69,6 +70,21 @@ const usersInDb = async () => {
   return users.map(user => user.toJSON())
 }
 
+const getTokenForUser = async (username) => {
+  const user = await User.findOne({ username })
+  if (!user) {
+    throw new Error('User not found')
+  }
+  
+  // Create token directly using the same logic as login controller
+  const userForToken = {
+    username: user.username,
+    id: user._id,
+  }
+  
+  return jwt.sign(userForToken, process.env.SECRET)
+}
+
 module.exports = {
   initialBlogs, 
   initialUsers,
@@ -78,5 +94,6 @@ module.exports = {
   userWithTooShortPassword,
   nonExistingId, 
   blogsInDb, 
-  usersInDb
+  usersInDb,
+  getTokenForUser
 }

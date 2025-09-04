@@ -14,19 +14,24 @@ beforeEach(async () => {
 
 describe('creating a user', () => {
   test('should add new user if the username is unique and the password is long enough', async () => {
-    const usersAtStart = await helper.usersInDb()
-
-    await api
+    const response = await api
       .post('/api/users/')
       .send(helper.uniqueUser)
       .expect(201)
       .expect('Content-Type', /application\/json/)
 
+    // Verify the response contains the new user
+    assert.strictEqual(response.body.username, 'mluukkai')
+    assert.strictEqual(response.body.name, 'Matti Luukkainen')
+    
+    // Verify the user was actually saved to the database
     const usersAtEnd = await helper.usersInDb()
-    assert.strictEqual(usersAtEnd.length, usersAtStart.length + 1)
+    const usernames = usersAtEnd.map(u => u.username)
+    assert(usernames.includes('mluukkai'))
   })
 
   test('should fail if the username is not unique', async () => {
+    // Try to create a user with username 'root' (which already exists from initialUsers)
     await api
       .post('/api/users/')
       .send(helper.notUniqueUser)

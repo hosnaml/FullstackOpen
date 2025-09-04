@@ -38,6 +38,11 @@ usersRouter.post('/', async (request, response, next) => {
 
     response.status(201).json(savedUser)
   } catch(exception) {
+    if (exception.name === 'MongoServerError' && exception.code === 11000) {
+      return response.status(400).json({ 
+        error: 'expected `username` to be unique' 
+      })
+    }
     next(exception)
   }
 })

@@ -25,11 +25,9 @@ blogsRouter.post('/', async (request, response) => {
   try {
     const body = request.body
 
-    // Get the first user from the database as the creator
-    const user = await User.findOne({})
-
-    if (!user) {
-      return response.status(400).json({ error: 'no users found in database' })
+    // Check if user is authenticated
+    if (!request.user) {
+      return response.status(401).json({ error: 'token missing or invalid' })
     }
 
     const blog = new Blog({
@@ -37,11 +35,11 @@ blogsRouter.post('/', async (request, response) => {
       author: body.author,
       url: body.url,
       likes: body.likes || 0,
-      user: user._id
+      user: request.user._id
     })
 
     const savedBlog = await blog.save()
-    await User.findByIdAndUpdate(user._id, { 
+    await User.findByIdAndUpdate(request.user._id, { 
       $push: { blogs: savedBlog._id } 
     })
 
@@ -71,11 +69,28 @@ blogsRouter.put('/:id', async (request, response) => {
 
 blogsRouter.delete('/:id', async (request, response) => {
   try {
-    await Blog.findByIdAndDelete(request.params.id)
-    response.status(204).end()
+    if (!request.user) {
+      return response.status(401).json({ error: 'token missing or invalid' })
+    }
+    
+    const userid = request.user._id
+    const blog = await Blog.findById(request.params.id)
+    
+    if (!blog) {
+      return response.status(404).json({ error: 'blog not found' })
+    }
+    
+    if (blog.user.toString() === userid.toString()) {
+      await Blog.findByIdAndDelete(request.params.id)
+      response.status(204).end()
+    } else {
+      response.status(403).json({ error: 'not authorized to delete this blog' })
+    }
   } catch (error) {
     response.status(400).json({ error: error.message })
   }
+
+  
 })
 
 module.exports = blogsRouter
