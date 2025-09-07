@@ -1,0 +1,143 @@
+Script started on Sun Sep  7 15:27:15 2025
+[1m[7m%[27m[1m[0m                                                                           ]2;hosnamolavi@Hosnas-MacBook-Air:~/Documents/FullstackOpen/part12/part12-containers-applications-main]1;..ications-main]7;file://Hosnas-MacBook-Air.local/Users/hosnamolavi/Documents/FullstackOpen/part12/part12-containers-applications-main\[0m[27m[24m[J[01;32m➜  [36mpart12-containers-applications-main[00m [K[?1h=[?2004h[0m[27m[24m[J[01;32m➜  [36mpart12-containers-applications-main[00m [01;34mgit:([31mmain[34m) [33m✗[00m [Kscript script-answers/exercise12_4.txt[K
+[K[A[15C[A[37Cdocker[2Ctart [2Ci 3500b29eaea4[K[1B[K[A[6C[?1l>[?2004l[1B]2;docker start -ai 3500b29eaea4]1;docker[?2004h]0;root@3500b29eaea4: /root@3500b29eaea4:/# [7mcurl -sL https://deb.nodesource.com/setup_20.x | bash[27m
+[7mapt install -y nodejs[27m[Acurl -sL https://deb.nodesource.com/setup_20.x | bash
+apt install -y nodejs
+[?2004lbash: curl: command not found
+Reading package lists... 0%Reading package lists... 0%Reading package lists... 0%Reading package lists... 5%Reading package lists... 5%Reading package lists... 56%Reading package lists... 56%Reading package lists... 57%Reading package lists... 57%Reading package lists... 57%Reading package lists... 57%Reading package lists... 63%Reading package lists... 63%Reading package lists... 70%Reading package lists... 70%Reading package lists... 80%Reading package lists... 80%Reading package lists... 80%Reading package lists... 80%Reading package lists... 81%Reading package lists... 81%Reading package lists... 81%Reading package lists... 81%Reading package lists... 86%Reading package lists... 86%Reading package lists... 89%Reading package lists... 89%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree... Done
+Reading state information... 0% Reading state information... 6%Reading state information... Done
+nodejs is already the newest version (18.19.1+dfsg-6ubuntu5).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[?2004h]0;root@3500b29eaea4: /root@3500b29eaea4:/# [K[7mapt update && apt install -y nano[27mapt update && apt install -y nano    curl
+[?2004l[33m0% [Working][0m            Hit:1 http://ports.ubuntu.com/ubuntu-ports noble InRelease
+[33m0% [Working][0m[33m0% [Waiting for headers][0m                        Hit:2 http://ports.ubuntu.com/ubuntu-ports noble-updates InRelease
+[33m                        0% [Working][0m[33m0% [Waiting for headers][0m                        Hit:3 http://ports.ubuntu.com/ubuntu-ports noble-backports InRelease
+[33m                        0% [Working][0m[33m0% [Waiting for headers][0m                        Hit:4 http://ports.ubuntu.com/ubuntu-ports noble-security InRelease
+[33m                        0% [Working][0m[33m20% [Working][0m             Reading package lists... 0%Reading package lists... 0%Reading package lists... 0%Reading package lists... 5%Reading package lists... 5%Reading package lists... 56%Reading package lists... 56%Reading package lists... 57%Reading package lists... 57%Reading package lists... 57%Reading package lists... 57%Reading package lists... 63%Reading package lists... 63%Reading package lists... 70%Reading package lists... 70%Reading package lists... 80%Reading package lists... 80%Reading package lists... 80%Reading package lists... 80%Reading package lists... 81%Reading package lists... 81%Reading package lists... 81%Reading package lists... 81%Reading package lists... 86%Reading package lists... 86%Reading package lists... 89%Reading package lists... 89%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree... Done
+Reading state information... 0% Reading state information... 6%Reading state information... Done
+All packages are up to date.
+Reading package lists... 0%Reading package lists... 0%Reading package lists... 0%Reading package lists... 5%Reading package lists... 5%Reading package lists... 56%Reading package lists... 56%Reading package lists... 57%Reading package lists... 57%Reading package lists... 57%Reading package lists... 57%Reading package lists... 63%Reading package lists... 63%Reading package lists... 70%Reading package lists... 70%Reading package lists... 80%Reading package lists... 80%Reading package lists... 80%Reading package lists... 80%Reading package lists... 81%Reading package lists... 81%Reading package lists... 81%Reading package lists... 81%Reading package lists... 86%Reading package lists... 86%Reading package lists... 89%Reading package lists... 89%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree... Done
+Reading state information... 0% Reading state information... 6%Reading state information... Done
+The following additional packages will be installed:
+  krb5-locales libcurl4t64 libgssapi-krb5-2 libk5crypto3 libkeyutils1
+  libkrb5-3 libkrb5support0 libldap-common libldap2 libpsl5t64 librtmp1
+  libsasl2-2 libsasl2-modules libsasl2-modules-db libssh-4 publicsuffix
+Suggested packages:
+  krb5-doc krb5-user libsasl2-modules-gssapi-mit
+  | libsasl2-modules-gssapi-heimdal libsasl2-modules-ldap
+  libsasl2-modules-otp libsasl2-modules-sql
+The following NEW packages will be installed:
+  curl krb5-locales libcurl4t64 libgssapi-krb5-2 libk5crypto3
+  libkeyutils1 libkrb5-3 libkrb5support0 libldap-common libldap2
+  libpsl5t64 librtmp1 libsasl2-2 libsasl2-modules libsasl2-modules-db
+  libssh-4 publicsuffix
+0 upgraded, 17 newly installed, 0 to remove and 0 not upgraded.
+Need to get 1997 kB of archives.
+After this operation, 6441 kB of additional disk space will be used.
+[33m0% [Working][0m            Get:1 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 krb5-locales all 1.20.1-6ubuntu2.6 [14.8 kB]
+[33m1% [1 krb5-locales 13.8 kB/14.8 kB 93%][0m[33m                                       2% [Working][0m            Get:2 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libkrb5support0 arm64 1.20.1-6ubuntu2.6 [34.8 kB]
+[33m2% [2 libkrb5support0 3934 B/34.8 kB 11%][0m[33m                                         4% [Waiting for headers][0m                        Get:3 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libk5crypto3 arm64 1.20.1-6ubuntu2.6 [85.8 kB]
+[33m5% [3 libk5crypto3 5447 B/85.8 kB 6%][0m[33m                                     9% [Waiting for headers][0m                        Get:4 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 libkeyutils1 arm64 1.6.3-3build1 [9654 B]
+[33m9% [4 libkeyutils1 9654 B/9654 B 100%][0m[33m                                      11% [Working][0m             Get:5 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libkrb5-3 arm64 1.20.1-6ubuntu2.6 [349 kB]
+[33m11% [5 libkrb5-3 5632 B/349 kB 2%][0m[33m                                  26% [Waiting for headers][0m                         Get:6 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libgssapi-krb5-2 arm64 1.20.1-6ubuntu2.6 [142 kB]
+[33m26% [6 libgssapi-krb5-2 18.0 kB/142 kB 13%][0m[33m                                           33% [Waiting for headers][0m                         Get:7 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 libpsl5t64 arm64 0.21.2-1.1build1 [57.4 kB]
+[33m33% [7 libpsl5t64 17.3 kB/57.4 kB 30%][0m[33m                                      36% [Working][0m             Get:8 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 publicsuffix all 20231001.0357-0.1 [129 kB]
+[33m37% [8 publicsuffix 25.1 kB/129 kB 19%][0m[33m                                       42% [Waiting for headers][0m                         Get:9 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libsasl2-modules-db arm64 2.1.28+dfsg1-5ubuntu3.1 [21.6 kB]
+[33m43% [9 libsasl2-modules-db 21.6 kB/21.6 kB 100%][0m[33m                                                44% [Waiting for headers][0m                         Get:10 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libsasl2-2 arm64 2.1.28+dfsg1-5ubuntu3.1 [54.7 kB]
+[33m45% [10 libsasl2-2 5086 B/54.7 kB 9%][0m[33m                                     48% [Waiting for headers][0m                         Get:11 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libldap2 arm64 2.6.7+dfsg-1~exp1ubuntu8.2 [194 kB]
+[33m48% [11 libldap2 15.7 kB/194 kB 8%][0m[33m                                   57% [Waiting for headers][0m                         Get:12 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 librtmp1 arm64 2.4+20151223.gitfa8646d.1-2build7 [57.8 kB]
+[33m57% [12 librtmp1 774 B/57.8 kB 1%][0m[33m                                  60% [Working][0m             Get:13 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libssh-4 arm64 0.10.6-2ubuntu0.1 [190 kB]
+[33m61% [13 libssh-4 25.3 kB/190 kB 13%][0m[33m                                    69% [Working][0m             Get:14 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libcurl4t64 arm64 8.5.0-2ubuntu10.6 [333 kB]
+[33m70% [14 libcurl4t64 31.9 kB/333 kB 10%][0m[33m                                       84% [Waiting for headers][0m                         Get:15 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 curl arm64 8.5.0-2ubuntu10.6 [222 kB]
+[33m84% [15 curl 7484 B/222 kB 3%][0m[33m                              94% [Waiting for headers][0m                         Get:16 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libldap-common all 2.6.7+dfsg-1~exp1ubuntu8.2 [31.7 kB]
+[33m95% [16 libldap-common 31.7 kB/31.7 kB 100%][0m[33m                                            96% [Waiting for headers][0m                         Get:17 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libsasl2-modules arm64 2.1.28+dfsg1-5ubuntu3.1 [69.6 kB]
+[33m96% [17 libsasl2-modules 0 B/69.6 kB 0%][0m[33m                                        100% [Working][0m              Fetched 1997 kB in 3s (780 kB/s)
+debconf: delaying package configuration, since apt-utils is not installed
+
+7[0;13r8[1ASelecting previously unselected package krb5-locales.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 5734 files and directories currently installed.)
+Preparing to unpack .../00-krb5-locales_1.20.1-6ubuntu2.6_all.deb ...
+7[14;0f[42m[30mProgress: [  0%][49m[39m [.....................................................] 87[14;0f[42m[30mProgress: [  1%][49m[39m [.....................................................] 8Unpacking krb5-locales (1.20.1-6ubuntu2.6) ...
+7[14;0f[42m[30mProgress: [  3%][49m[39m [#....................................................] 8Selecting previously unselected package libkrb5support0:arm64.
+Preparing to unpack .../01-libkrb5support0_1.20.1-6ubuntu2.6_arm64.deb ...
+7[14;0f[42m[30mProgress: [  4%][49m[39m [##...................................................] 8Unpacking libkrb5support0:arm64 (1.20.1-6ubuntu2.6) ...
+7[14;0f[42m[30mProgress: [  6%][49m[39m [###..................................................] 8Selecting previously unselected package libk5crypto3:arm64.
+Preparing to unpack .../02-libk5crypto3_1.20.1-6ubuntu2.6_arm64.deb ...
+7[14;0f[42m[30mProgress: [  7%][49m[39m [###..................................................] 8Unpacking libk5crypto3:arm64 (1.20.1-6ubuntu2.6) ...
+7[14;0f[42m[30mProgress: [  9%][49m[39m [####.................................................] 8Selecting previously unselected package libkeyutils1:arm64.
+Preparing to unpack .../03-libkeyutils1_1.6.3-3build1_arm64.deb ...
+7[14;0f[42m[30mProgress: [ 10%][49m[39m [#####................................................] 8Unpacking libkeyutils1:arm64 (1.6.3-3build1) ...
+7[14;0f[42m[30mProgress: [ 12%][49m[39m [######...............................................] 8Selecting previously unselected package libkrb5-3:arm64.
+Preparing to unpack .../04-libkrb5-3_1.20.1-6ubuntu2.6_arm64.deb ...
+7[14;0f[42m[30mProgress: [ 13%][49m[39m [######...............................................] 8Unpacking libkrb5-3:arm64 (1.20.1-6ubuntu2.6) ...
+7[14;0f[42m[30mProgress: [ 14%][49m[39m [#######..............................................] 8Selecting previously unselected package libgssapi-krb5-2:arm64.
+Preparing to unpack .../05-libgssapi-krb5-2_1.20.1-6ubuntu2.6_arm64.deb ...
+7[14;0f[42m[30mProgress: [ 16%][49m[39m [########.............................................] 8Unpacking libgssapi-krb5-2:arm64 (1.20.1-6ubuntu2.6) ...
+7[14;0f[42m[30mProgress: [ 17%][49m[39m [#########............................................] 8Selecting previously unselected package libpsl5t64:arm64.
+Preparing to unpack .../06-libpsl5t64_0.21.2-1.1build1_arm64.deb ...
+7[14;0f[42m[30mProgress: [ 19%][49m[39m [#########............................................] 8Unpacking libpsl5t64:arm64 (0.21.2-1.1build1) ...
+7[14;0f[42m[30mProgress: [ 20%][49m[39m [##########...........................................] 8Selecting previously unselected package publicsuffix.
+Preparing to unpack .../07-publicsuffix_20231001.0357-0.1_all.deb ...
+7[14;0f[42m[30mProgress: [ 22%][49m[39m [###########..........................................] 8Unpacking publicsuffix (20231001.0357-0.1) ...
+7[14;0f[42m[30mProgress: [ 23%][49m[39m [############.........................................] 8Selecting previously unselected package libsasl2-modules-db:arm64.
+Preparing to unpack .../08-libsasl2-modules-db_2.1.28+dfsg1-5ubuntu3.1_arm64.deb ...
+7[14;0f[42m[30mProgress: [ 25%][49m[39m [#############........................................] 8Unpacking libsasl2-modules-db:arm64 (2.1.28+dfsg1-5ubuntu3.1) ...
+7[14;0f[42m[30mProgress: [ 26%][49m[39m [#############........................................] 8Selecting previously unselected package libsasl2-2:arm64.
+Preparing to unpack .../09-libsasl2-2_2.1.28+dfsg1-5ubuntu3.1_arm64.deb ...
+7[14;0f[42m[30mProgress: [ 28%][49m[39m [##############.......................................] 8Unpacking libsasl2-2:arm64 (2.1.28+dfsg1-5ubuntu3.1) ...
+7[14;0f[42m[30mProgress: [ 29%][49m[39m [###############......................................] 8Selecting previously unselected package libldap2:arm64.
+Preparing to unpack .../10-libldap2_2.6.7+dfsg-1~exp1ubuntu8.2_arm64.deb ...
+7[14;0f[42m[30mProgress: [ 30%][49m[39m [################.....................................] 8Unpacking libldap2:arm64 (2.6.7+dfsg-1~exp1ubuntu8.2) ...
+7[14;0f[42m[30mProgress: [ 32%][49m[39m [################.....................................] 8Selecting previously unselected package librtmp1:arm64.
+Preparing to unpack .../11-librtmp1_2.4+20151223.gitfa8646d.1-2build7_arm64.deb ...
+7[14;0f[42m[30mProgress: [ 33%][49m[39m [#################....................................] 8Unpacking librtmp1:arm64 (2.4+20151223.gitfa8646d.1-2build7) ...
+7[14;0f[42m[30mProgress: [ 35%][49m[39m [##################...................................] 8Selecting previously unselected package libssh-4:arm64.
+Preparing to unpack .../12-libssh-4_0.10.6-2ubuntu0.1_arm64.deb ...
+7[14;0f[42m[30mProgress: [ 36%][49m[39m [###################..................................] 8Unpacking libssh-4:arm64 (0.10.6-2ubuntu0.1) ...
+7[14;0f[42m[30mProgress: [ 38%][49m[39m [###################..................................] 8Selecting previously unselected package libcurl4t64:arm64.
+Preparing to unpack .../13-libcurl4t64_8.5.0-2ubuntu10.6_arm64.deb ...
+7[14;0f[42m[30mProgress: [ 39%][49m[39m [####################.................................] 8Unpacking libcurl4t64:arm64 (8.5.0-2ubuntu10.6) ...
+7[14;0f[42m[30mProgress: [ 41%][49m[39m [#####################................................] 8Selecting previously unselected package curl.
+Preparing to unpack .../14-curl_8.5.0-2ubuntu10.6_arm64.deb ...
+7[14;0f[42m[30mProgress: [ 42%][49m[39m [######################...............................] 8Unpacking curl (8.5.0-2ubuntu10.6) ...
+7[14;0f[42m[30mProgress: [ 43%][49m[39m [#######################..............................] 8Selecting previously unselected package libldap-common.
+Preparing to unpack .../15-libldap-common_2.6.7+dfsg-1~exp1ubuntu8.2_all.deb ...
+7[14;0f[42m[30mProgress: [ 45%][49m[39m [#######################..............................] 8Unpacking libldap-common (2.6.7+dfsg-1~exp1ubuntu8.2) ...
+7[14;0f[42m[30mProgress: [ 46%][49m[39m [########################.............................] 8Selecting previously unselected package libsasl2-modules:arm64.
+Preparing to unpack .../16-libsasl2-modules_2.1.28+dfsg1-5ubuntu3.1_arm64.deb ...
+7[14;0f[42m[30mProgress: [ 48%][49m[39m [#########################............................] 8Unpacking libsasl2-modules:arm64 (2.1.28+dfsg1-5ubuntu3.1) ...
+7[14;0f[42m[30mProgress: [ 49%][49m[39m [##########################...........................] 8Setting up libkeyutils1:arm64 (1.6.3-3build1) ...
+7[14;0f[42m[30mProgress: [ 51%][49m[39m [##########################...........................] 87[14;0f[42m[30mProgress: [ 52%][49m[39m [###########################..........................] 8Setting up libsasl2-modules:arm64 (2.1.28+dfsg1-5ubuntu3.1) ...
+7[14;0f[42m[30mProgress: [ 54%][49m[39m [############################.........................] 87[14;0f[42m[30mProgress: [ 55%][49m[39m [#############################........................] 8Setting up libpsl5t64:arm64 (0.21.2-1.1build1) ...
+7[14;0f[42m[30mProgress: [ 57%][49m[39m [#############################........................] 87[14;0f[42m[30mProgress: [ 58%][49m[39m [##############################.......................] 8Setting up krb5-locales (1.20.1-6ubuntu2.6) ...
+7[14;0f[42m[30mProgress: [ 59%][49m[39m [###############################......................] 87[14;0f[42m[30mProgress: [ 61%][49m[39m [################################.....................] 8Setting up libldap-common (2.6.7+dfsg-1~exp1ubuntu8.2) ...
+7[14;0f[42m[30mProgress: [ 62%][49m[39m [#################################....................] 87[14;0f[42m[30mProgress: [ 64%][49m[39m [#################################....................] 8Setting up libkrb5support0:arm64 (1.20.1-6ubuntu2.6) ...
+7[14;0f[42m[30mProgress: [ 65%][49m[39m [##################################...................] 87[14;0f[42m[30mProgress: [ 67%][49m[39m [###################################..................] 8Setting up libsasl2-modules-db:arm64 (2.1.28+dfsg1-5ubuntu3.1) ...
+7[14;0f[42m[30mProgress: [ 68%][49m[39m [####################################.................] 87[14;0f[42m[30mProgress: [ 70%][49m[39m [####################################.................] 8Setting up librtmp1:arm64 (2.4+20151223.gitfa8646d.1-2build7) ...
+7[14;0f[42m[30mProgress: [ 71%][49m[39m [#####################################................] 87[14;0f[42m[30mProgress: [ 72%][49m[39m [######################################...............] 8Setting up libk5crypto3:arm64 (1.20.1-6ubuntu2.6) ...
+7[14;0f[42m[30mProgress: [ 74%][49m[39m [#######################################..............] 87[14;0f[42m[30mProgress: [ 75%][49m[39m [#######################################..............] 8Setting up libsasl2-2:arm64 (2.1.28+dfsg1-5ubuntu3.1) ...
+7[14;0f[42m[30mProgress: [ 77%][49m[39m [########################################.............] 87[14;0f[42m[30mProgress: [ 78%][49m[39m [#########################################............] 8Setting up libkrb5-3:arm64 (1.20.1-6ubuntu2.6) ...
+7[14;0f[42m[30mProgress: [ 80%][49m[39m [##########################################...........] 87[14;0f[42m[30mProgress: [ 81%][49m[39m [###########################################..........] 8Setting up publicsuffix (20231001.0357-0.1) ...
+7[14;0f[42m[30mProgress: [ 83%][49m[39m [###########################################..........] 87[14;0f[42m[30mProgress: [ 84%][49m[39m [############################################.........] 8Setting up libldap2:arm64 (2.6.7+dfsg-1~exp1ubuntu8.2) ...
+7[14;0f[42m[30mProgress: [ 86%][49m[39m [#############################################........] 87[14;0f[42m[30mProgress: [ 87%][49m[39m [##############################################.......] 8Setting up libgssapi-krb5-2:arm64 (1.20.1-6ubuntu2.6) ...
+7[14;0f[42m[30mProgress: [ 88%][49m[39m [##############################################.......] 87[14;0f[42m[30mProgress: [ 90%][49m[39m [###############################################......] 8Setting up libssh-4:arm64 (0.10.6-2ubuntu0.1) ...
+7[14;0f[42m[30mProgress: [ 91%][49m[39m [################################################.....] 87[14;0f[42m[30mProgress: [ 93%][49m[39m [#################################################....] 8Setting up libcurl4t64:arm64 (8.5.0-2ubuntu10.6) ...
+7[14;0f[42m[30mProgress: [ 94%][49m[39m [#################################################....] 87[14;0f[42m[30mProgress: [ 96%][49m[39m [##################################################...] 8Setting up curl (8.5.0-2ubuntu10.6) ...
+7[14;0f[42m[30mProgress: [ 97%][49m[39m [###################################################..] 87[14;0f[42m[30mProgress: [ 99%][49m[39m [####################################################.] 8Processing triggers for libc-bin (2.39-0ubuntu8.5) ...
+
+7[0;14r8[1A[J[?2004h]0;root@3500b29eaea4: /root@3500b29eaea4:/# [K[7mroot@b8548b9faec3:/# node /usr/src/app/index.js[27m
+[7mHello World[27m[A9eaea4:/# root@b8548b9faec3:/# node /usr/src/app/index.js
+Hello World
+[?2004lbash: root@b8548b9faec3:/#: No such file or directory
+bash: Hello: command not found
+[?2004h]0;root@3500b29eaea4: /root@3500b29eaea4:/# [KHello Worldroot@b8548b9faec3:/# node /usr/src/app/index.jsHello World[K           [7mnode /usr/src/app/index.js[27mnode /usr/src/app/index.js
+[?2004lHello from inside the container
+Hello World
+[?2004h]0;root@3500b29eaea4: /root@3500b29eaea4:/# [Kexit
+[?2004lexit
+[1m[7m%[27m[1m[0m                                                                           ]2;hosnamolavi@Hosnas-MacBook-Air:~/Documents/FullstackOpen/part12/part12-containers-applications-main]1;..ications-main]7;file://Hosnas-MacBook-Air.local/Users/hosnamolavi/Documents/FullstackOpen/part12/part12-containers-applications-main\[0m[27m[24m[J[01;32m➜  [36mpart12-containers-applications-main[00m [01;34mgit:([31mmain[34m) [33m✗[00m [K[?1h=[?2004heexit[?1l>[?2004l
+]2;exit]1;exit
+Script done on Sun Sep  7 15:29:29 2025
