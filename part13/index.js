@@ -53,6 +53,14 @@ app.post('/api/blogs', async (req, res) => {
   }
 })
 
+app.delete('/api/blogs/:id', async (req, res) => {
+  const id = Number(req.params.id)
+  if (!Number.isInteger(id)) return res.status(400).json({ error: 'Invalid id' })
+  const deletedCount = await Blog.destroy({ where: { id } })
+  if (deletedCount === 0) return res.status(404).end()
+  return res.status(204).end()
+})
+
 const start = async () => {
   try {
     await sequelize.authenticate()
