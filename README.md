@@ -24,6 +24,8 @@ Containerization using Docker
 
 Using relational databases with web apps
 
+<img width="949" height="671" alt="Certificate-Completion-FullstackCourse" src="https://github.com/user-attachments/assets/05e26823-a8ba-43fa-b649-17d1c99606cb" />
+
 
 
 
