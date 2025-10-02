@@ -35,3 +35,7 @@ node_modules/
 .env.development.local
 .env.test.local
 .env.production.local
+part2/phonebook/.DS_Store
+part2/phonebook/.DS_Store
+part2/.DS_Store
+.DS_Store
