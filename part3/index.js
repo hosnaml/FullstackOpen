@@ -13,7 +13,7 @@ app.use(cors())
 app.use(express.static(path.join(__dirname, 'dist')))
 
 require('dotenv').config()
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3001
 
 const Person = require('./models/person')
 
