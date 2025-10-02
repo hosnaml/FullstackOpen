@@ -4,10 +4,12 @@ import blogService from './services/blogs'
 import LoginForm from './components/LoginForm'
 import loginService from './services/login'
 import BlogForm from './components/BlogForm'
+import Notification from './components/Notification'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
+  const [message, setMessage] = useState(null)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -32,22 +34,27 @@ const App = () => {
       )
       blogService.setToken(user.token)
       setUser(user)
+      setMessage({ text: `Hello ${credentials.username}`, type: 'success' })
     } catch (exception) {
-      console.log('Wrong credentials')
+      setMessage({ text: 'Wrong credentials', type: 'error' })
     }
   }
 
   const handleLogout = () => {
+    setMessage({ text: `Goodbye ${user.name}`, type: 'success' })
     setUser(null)
+    window.localStorage.removeItem('loggedBlogAppUser')
   }
   const handleCreateBlog = async (blog) => {
     const newBlog = await blogService.create(blog)
     setBlogs(blogs.concat(newBlog))
+    setMessage({ text: `A new blog "${newBlog.title}" by ${newBlog.author} added`, type: 'success' })
   }
 
   return (
     <div>
       <h1>blogs</h1>
+      <Notification message={message} setMessage={setMessage} />
       {!user ?
         <LoginForm onLogin={handleLogin} />
         :
