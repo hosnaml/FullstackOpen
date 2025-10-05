@@ -9,10 +9,10 @@ function BlogForm({ onCreate }) {
         url: ''
     })
 
-    const handleBlogSubmit = (event) =>{
+    function handleBlogSubmit(event) {
         event.preventDefault()
         const success = onCreate(newBlog)
-        if(success){
+        if (success) {
             setNewBlog({
                 title: '',
                 author: '',
@@ -61,6 +61,7 @@ function BlogForm({ onCreate }) {
             </div>
             <button type="submit">create</button>
         </form>
+      
     </div>
     
   )
