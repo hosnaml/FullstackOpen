@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
-export default function LoginForm({ onLogin }) {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+export default function LoginForm({ onLogin, username, password, setUsername, setPassword }) {
+  
+  
   const handleLogin = async (event) => {
     event.preventDefault()
     
@@ -33,7 +33,8 @@ export default function LoginForm({ onLogin }) {
               </label>
           </div>
           <button type="submit">login</button>
-      </form></div>
+      </form>
+      </div>
 
   )
 }
