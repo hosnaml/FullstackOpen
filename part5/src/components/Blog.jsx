@@ -40,7 +40,7 @@ const Blog = ({ blog, setBlogs }) => {
         <p>{blog.author}</p>
         <button className="blogButton" onClick={handleRemove}>remove</button>
       </div>
-    </div>  
+    </div>
   )
 }
 

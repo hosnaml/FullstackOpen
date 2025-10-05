@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useImperativeHandle } from 'react'
+import { useImperativeHandle } from 'react'
 
 const Togglable = (props) => {
 
@@ -7,7 +7,7 @@ const Togglable = (props) => {
   const hideWhenVisible = { display: visible ? 'none' : '' }
   const showWhenVisible = { display: visible ? '' : 'none' }
 
- const toggleVisibility = () => {
+  const toggleVisibility = () => {
     setVisible(!visible)
   }
 
@@ -17,13 +17,13 @@ const Togglable = (props) => {
 
   return (
     <div>
-        <div style={hideWhenVisible}>
-          <button onClick={toggleVisibility}>{props.buttonLabel}</button>
-        </div>
-        <div style={showWhenVisible}>
-          {props.children}
-          <button onClick={toggleVisibility}>cancel</button>
-        </div>
+      <div style={hideWhenVisible}>
+        <button onClick={toggleVisibility}>{props.buttonLabel}</button>
+      </div>
+      <div style={showWhenVisible}>
+        {props.children}
+        <button onClick={toggleVisibility}>cancel</button>
+      </div>
     </div>
   )
 }

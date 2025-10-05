@@ -19,7 +19,7 @@ const App = () => {
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
-    )  
+    )
   }, [])
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const App = () => {
       blogService.setToken(user.token)
       setUser(user)
       setMessage({ text: `Hello ${user.username}`, type: 'success' })
-    } catch (exception) {
+    } catch {
       setMessage({ text: 'Wrong credentials', type: 'error' })
     }
   }
@@ -50,7 +50,7 @@ const App = () => {
     setUser(null)
     window.localStorage.removeItem('loggedBlogAppUser')
   }
-  
+
   const handleCreateBlog = async (blog) => {
     blogFormRef.current.toggleVisibility()
     const newBlog = await blogService.create(blog)
@@ -63,29 +63,29 @@ const App = () => {
       <h1>blogs</h1>
       <Notification message={message} setMessage={setMessage} />
       {!user ?
-      <Togglable buttonLabel="Log in">
+        <Togglable buttonLabel="Log in">
           <LoginForm
-           onLogin={handleLogin}
-           username={username}
-           password={password}
-           setUsername={setUsername}
-           setPassword={setPassword}
-            />
-      </Togglable>
+            onLogin={handleLogin}
+            username={username}
+            password={password}
+            setUsername={setUsername}
+            setPassword={setPassword}
+          />
+        </Togglable>
         :
         <div>
           <p> {user.username.charAt(0).toUpperCase() + user.username.slice(1)} logged in <button onClick={handleLogout}>logout</button></p>
           {blogs
             .sort((a, b) => b.likes - a.likes)
             .map(blog =>
-            <Blog key={blog.id} blog={blog} setBlogs={setBlogs}/>
-          )}
-           <Togglable buttonLabel="Click to create a new blog" ref={blogFormRef}>
-              <BlogForm onCreate={handleCreateBlog} />
-           </Togglable>
+              <Blog key={blog.id} blog={blog} setBlogs={setBlogs}/>
+            )}
+          <Togglable buttonLabel="Click to create a new blog" ref={blogFormRef}>
+            <BlogForm onCreate={handleCreateBlog} />
+          </Togglable>
         </div>
-        
-      } 
+
+      }
     </div>
   )
 }
