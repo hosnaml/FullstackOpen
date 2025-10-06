@@ -30,7 +30,7 @@ const Blog = ({ blog, setBlogs }) => {
         <button className="blogButton" style={hideWhenVisible} onClick={() => setVisible(true)}>view</button>
         <button className="blogButton" style={showWhenVisible} onClick={() => setVisible(false)}>hide</button>
       </div>
-      <div style={showWhenVisible}>
+      <div className="blog-details" style={showWhenVisible}>
         <p>{blog.url}</p>
         <p>
           likes {blog.likes}
