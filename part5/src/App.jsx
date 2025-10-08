@@ -33,6 +33,7 @@ const App = () => {
 
   const handleLogin = async (credentials) => {
     try {
+      console.log('logging in with', credentials)
       const user = await loginService.login(credentials)
       window.localStorage.setItem(
         'loggedBlogAppUser', JSON.stringify(user)

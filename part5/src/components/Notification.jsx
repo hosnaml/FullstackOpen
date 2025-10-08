@@ -6,9 +6,9 @@ const Notification = ({ message, setMessage }) => {
     setMessage(null)
   }, 5000)
 
-  const className = message.type === 'error' ? 'error' : 'success'
+  const error= message.type === 'error' ? 'error' : 'success'
 
-  return <div className={className}>{message.text}</div>
+  return <div className={error}>{message.text}</div>
 }
 
 export default Notification
