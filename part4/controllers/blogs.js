@@ -43,7 +43,10 @@ blogsRouter.post('/', async (request, response) => {
       $push: { blogs: savedBlog._id } 
     })
 
-    response.status(201).json(savedBlog)
+    // Populate the user field before returning
+    const populatedBlog = await Blog.findById(savedBlog._id).populate('user', { username: 1, name: 1 })
+
+    response.status(201).json(populatedBlog)
   } catch(exception) {
     response.status(400).json({ error: exception.message })
   }
