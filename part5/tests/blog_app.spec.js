@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { loginWith, createBlog } from './helper';
+import { loginWith, createBlog, deleteBlog, likeBlog } from './helper';
 
 test.describe('Blog app', () => {
 
@@ -101,10 +101,55 @@ test.describe('When logged in and several notes exists', () => {
     })
 
     test('a new blog can be created', async ({ page }) => {
-        await createBlog(page, 'a blog created by playwright', 'Hosna Molavi', 'www.playwright.com');
+        await createBlog(page, 'second blog', 'Hosna Molavi', 'www.playwright.com');
         // Wait for success notification to appear first
         await page.locator('.success').waitFor({ state: 'visible' });
         // Check in the blog list specifically, not the success message
-        await expect(page.locator('.blog').filter({ hasText: 'a blog created by playwright' })).toBeVisible();
+        await expect(page.locator('.blog').filter({ hasText: 'second blog' })).toBeVisible();
+    })
+
+    test('user can delete a blog they created', async ({ page }) => {
+        // Set up dialog handler BEFORE triggering the delete action
+        page.on('dialog', async dialog => {
+            expect(dialog.type()).toBe('confirm')
+            expect(dialog.message()).toContain('Remove blog')
+            await dialog.accept()
+        })
+
+        await deleteBlog(page, 'first blog');
+
+        // Wait for success notification to appear first
+        await page.locator('.success').waitFor({ state: 'visible' });
+        // Check that the blog is no longer in the list
+        await expect(page.locator('.blog').filter({ hasText: 'first blog' })).toHaveCount(0);
+    })
+
+    test('Ensures blogs are ordered by likes in descending order', async ({ page }) => {
+        // Create additional blogs - all start with 0 likes
+        await createBlog(page, 'second blog', 'Author Two', 'www.secondblog.com');
+        await createBlog(page, 'third blog', 'Author Three', 'www.thirdblog.com');
+        
+        // Like blogs different amounts to test ordering
+        // third blog - 5 likes (should be first)
+        await likeBlog(page, 'third blog', 5);
+        
+        // second blog - 3 likes (should be second)  
+        await likeBlog(page, 'second blog', 3);
+        
+        // first blog - 1 like (should be third)
+        await likeBlog(page, 'first blog', 1);
+
+        // Get all blog elements and check their order
+        const blogs = await page.locator('.blog').all();
+        
+        // Extract titles in the order they appear
+        const firstBlogText = await blogs[0].textContent();
+        const secondBlogText = await blogs[1].textContent();
+        const thirdBlogText = await blogs[2].textContent();
+
+        // Verify the order - most likes first
+        expect(firstBlogText).toContain('third blog');   // 5 likes
+        expect(secondBlogText).toContain('second blog');  // 3 likes  
+        expect(thirdBlogText).toContain('first blog');    // 1 like
     })
 });
